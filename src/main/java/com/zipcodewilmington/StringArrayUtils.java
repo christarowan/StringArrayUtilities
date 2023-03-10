@@ -3,6 +3,9 @@ package com.zipcodewilmington;
 import java.util.Arrays;
 import java.util.*;
 
+
+
+
 /**
  * Created by leon on 1/29/18.
  */
@@ -102,6 +105,7 @@ public class StringArrayUtils {
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
+
         char[] alphabet = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
         Set<Character> alphaSet = new HashSet<Character>();
         for (char a : alphabet) {
@@ -127,16 +131,35 @@ public class StringArrayUtils {
      * @return number of occurrences the specified `value` has occurred
      */ // TODO
     public static int getNumberOfOccurrences(String[] array, String value) {
-        return 0;
-    }
+        int count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == value) {
+                count++;
+            }
 
+        }
+        return count;
+    }
     /**
      * @param array         array of String objects
      * @param valueToRemove value to remove from array
      * @return array with identical contents excluding values of `value`
      */ // TODO
+
+
+
     public static String[] removeValue(String[] array, String valueToRemove) {
-        return null;
+
+        String[] result = new String[array.length];
+
+        int j = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (!array[i].equals(valueToRemove)) {
+                result[j++] = array[i];
+            }
+        }
+
+        return  Arrays.copyOf(result, j);
     }
 
     /**
@@ -144,8 +167,28 @@ public class StringArrayUtils {
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
-        return null;
+
+        //iterate through array, find duplicate chars, remove, return array of strings with dups removed
+
+        List<String> result = new ArrayList<>();
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(array[0]);
+
+       for (int i = 1; i<array.length; i++) {
+            if((array[i] != array[i - 1])){
+            result.add(sb.toString());
+            sb = new StringBuilder();
+            }
+
+         sb.append(array[i]);
+
+        }
+
+        result.add(sb.toString());
+        return result.toArray(new String[result.size()]);
     }
+
 
     /**
      * @param array array of chars
