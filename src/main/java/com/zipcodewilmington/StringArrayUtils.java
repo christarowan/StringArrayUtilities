@@ -167,36 +167,43 @@ public class StringArrayUtils {
      * @return array of Strings with consecutive duplicates removes
      */ // TODO
     public static String[] removeConsecutiveDuplicates(String[] array) {
-
         //iterate through array, find duplicate chars, remove, return array of strings with dups removed
-
         List<String> result = new ArrayList<>();
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(array[0]);
-
-       for (int i = 1; i<array.length; i++) {
+        result.add(array[0]);
+        for (int i = 1; i<array.length; i++) {
             if((array[i] != array[i - 1])){
-            result.add(sb.toString());
-            sb = new StringBuilder();
+                result.add(array[i]);
             }
-
-         sb.append(array[i]);
-
         }
-
-        result.add(sb.toString());
-        return result.toArray(new String[result.size()]);
+        return result.toArray(new String[0]);
     }
-
 
     /**
      * @param array array of chars
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-        return null;
+
+        List<String> result = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i<array.length; i++) {
+            if (i == 0) {sb.append(array[i]);}
+            else if (array[i].equals(array[i-1])) {
+                sb.append(array[i]);
+
+            }
+            else {
+                result.add(sb.toString());
+                sb.setLength(0);
+                sb.append(array[i]);
+
+            }
+
+        }
+        result.add(sb.toString());
+        return result.toArray(new String[0]);
     }
+
 
 
 }
